@@ -1,4 +1,4 @@
-package nasa;
+package delayed;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -11,7 +11,8 @@ import org.apache.http.client.utils.URIBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ApodTest {
+
+public class DelayedTest {
 
     HttpClient httpClient;
     URIBuilder endpoint;
@@ -34,10 +35,10 @@ public class ApodTest {
 
     @Test
     public void apodTestSuccesfull() throws IOException, InterruptedException, URISyntaxException{
-        endpoint.addParameter("page", "2");
+        endpoint.addParameter("delay", "3");
         System.out.println("ENDPOINT: " + endpoint.build());
-        HttpResponse<String> response = ApodRequest.apodRequestDate(httpClient, endpoint);
-        ApodQuestions.validateRequest(HttpStatus.SC_OK, response, "page");
+        HttpResponse<String> response = DelayedRequest.apodRequestDate(httpClient, endpoint);
+        DelayedQuestions.validateRequest(HttpStatus.SC_OK, response, "page");
         System.out.println(response.body());
         
                     
@@ -45,8 +46,8 @@ public class ApodTest {
  
     @Test
     public void apodTestErrorDate() throws URISyntaxException, IOException, InterruptedException{
-        endpoint.addParameter("page", "10");
-        HttpResponse<String> response = ApodRequest.apodRequestDate(httpClient, endpoint);
-        ApodQuestions.validateRequest(HttpStatus.SC_BAD_REQUEST, response, "To keep ReqRes free, contributions towards server costs are appreciated!");
+        endpoint.addParameter("delay", "3");
+        HttpResponse<String> response = DelayedRequest.apodRequestDate(httpClient, endpoint);
+        DelayedQuestions.validateRequest(HttpStatus.SC_BAD_REQUEST, response, "To keep ReqRes free, contributions towards server costs are appreciated!");
     }
 }

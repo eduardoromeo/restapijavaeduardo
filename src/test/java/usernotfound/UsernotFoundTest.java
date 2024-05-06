@@ -1,4 +1,4 @@
-package userid;
+package usernotfound;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserTestDoce {
+public class UsernotFoundTest {
 
     private HttpClient httpClient;
     private URI endpoint;
@@ -23,11 +23,11 @@ public class UserTestDoce {
                 .connectTimeout(Duration.ofSeconds(10))
                 .build();
 
-        endpoint = new URI("https://reqres.in/api/users/12");
+        endpoint = new URI("https://reqres.in/api/users/1000"); // Cambiar el ID del usuario
     }
 
     @Test
-    public void testGetUserById() throws IOException, InterruptedException {
+    public void testGetNonExistingUser() throws IOException, InterruptedException {
         // Realizar la solicitud GET
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(endpoint)
@@ -37,11 +37,9 @@ public class UserTestDoce {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         // Verificar el código de estado
-        assertEquals(200, response.statusCode());
+        assertEquals(404, response.statusCode()); // Esperamos un código 404 para un usuario inexistente
 
-        // Imprimir el ID del usuario 12
-        String responseBody = response.body();
-        int id = Integer.parseInt(responseBody.substring(responseBody.indexOf("id") + 4, responseBody.indexOf("id") + 6));
-        System.out.println("ID del usuario 12: " + id + responseBody);
+        // Imprimir el cuerpo de la respuesta
+        System.out.println("Respuesta del servidor: " + response.body());
     }
 }
