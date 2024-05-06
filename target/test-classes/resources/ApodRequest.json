@@ -1,0 +1,42 @@
+{
+    "type": "object",
+    "properties": {
+        "date": {
+            "type": "string",
+            "format": "date"
+        },
+        "explanation": {
+            "type": "string"
+        },
+        "hdurl": {
+            "type": "string",
+            "format": "uri"
+        },
+        "media_type": {
+            "type": "string",
+            "enum": [
+                "image",
+                "video"
+            ]
+        },
+        "service_version": {
+            "type": "boolean"
+        },
+        "title": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string",
+            "format": "uri"
+        }
+    },
+    "required": [
+        "date",
+        "explanation",
+        "hdurl",
+        "media_type",
+        "service_version",
+        "title",
+        "url"
+    ]
+}
