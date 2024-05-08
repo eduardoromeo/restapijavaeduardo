@@ -51,8 +51,7 @@ public class CreateTest {
 
         System.out.println("RESPONSE BODY: " + response.body() );
         assertEquals(HttpStatus.SC_CREATED, response.statusCode(), "Validación de Status Code Created");
-     //   assertTrue(response.body().contains("romeo"),"nombre validado");
-     //   assertTrue(response.body().contains("QA full"),"Job validado");
+     
     }
     
 }
